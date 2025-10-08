@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 112233  # 设置 root 密码
+      MYSQL_DATABASE: go_ai_assistant          # 数据库名称
+      MYSQL_USER: user1              # 设置你的用户名
+      MYSQL_PASSWORD: 112233          # 设置你的密码
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+volumes:
+  mysql_data:
