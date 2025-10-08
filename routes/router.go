@@ -15,9 +15,10 @@ func SetupRouter() *gin.Engine {
 	apiV1 := router.Group("/api/v1")
 	{
 		// 用户路由组
-		userRouters := apiV1.Group("/users")
+		userRoutes := apiV1.Group("/users")
 		{
-			userRouters.POST("/register", api.Register)
+			userRoutes.POST("/register", api.Register)
+			userRoutes.POST("/login", api.Login) // 添加登录路由
 		}
 	}
 

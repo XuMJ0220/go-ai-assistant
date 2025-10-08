@@ -14,8 +14,14 @@ type DBConfig struct {
 	DBName   string
 }
 
+type JWTConfig struct {
+	SecretKey   string `mapstructure:"secret_key"`
+	ExpireHours int    `mapstructure:"expire_hours"`
+}
+
 type Config struct {
 	Database DBConfig
+	JWT      JWTConfig
 }
 
 var AppConfig Config

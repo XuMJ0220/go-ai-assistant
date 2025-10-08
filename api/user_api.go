@@ -30,3 +30,25 @@ func Register(c *gin.Context) {
 		"user_id": user.ID,
 	})
 }
+
+// Login 是处理用户登录请求的 Handler
+func Login(c *gin.Context) {
+	var input service.LoginUserInput
+
+	if err := c.ShouldBindJSON(&input); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	token, err := service.Login(input)
+	if err != nil {
+		// 注意这里我们统一返回 401 Unauthorized，而不是 500
+		c.JSON(http.StatusUnauthorized, gin.H{"error": err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"message": "Login successful",
+		"token":   token,
+	})
+}
