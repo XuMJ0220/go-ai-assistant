@@ -22,14 +22,19 @@ func SetupRouter() *gin.Engine {
 		}
 
 		// 受保护的路由组
-		protectedRoutes:=apiV1.Group("")
+		protectedRoutes := apiV1.Group("")
 		protectedRoutes.Use(api.AuthMiddleware())
 		{
 			// 知识库路由组
 			kbRoutes := protectedRoutes.Group("/knowledge-bases")
 			{
-				kbRoutes.POST("", api.CreateKnowledgeBase)    // POST /api/v1/knowledge-bases
-				kbRoutes.GET("", api.ListKnowledgeBases)      // GET /api/v1/knowledge-bases
+				kbRoutes.POST("", api.CreateKnowledgeBase) // POST /api/v1/knowledge-bases
+				kbRoutes.GET("", api.ListKnowledgeBases)   // GET /api/v1/knowledge-bases
+			}
+			// 聊天路由组
+			chatRoutes := protectedRoutes.Group("/chat")
+			{
+				chatRoutes.POST("/simple", api.SimpleChatHandler)
 			}
 		}
 	}

@@ -19,9 +19,15 @@ type JWTConfig struct {
 	ExpireHours int    `mapstructure:"expire_hours"`
 }
 
+// DashScopeConfig 存储 DashScope 平台配置
+type DashScopeConfig struct {
+	ApiKey string `mapstructure:"api_key"`
+}
+
 type Config struct {
-	Database DBConfig
-	JWT      JWTConfig
+	Database  DBConfig
+	JWT       JWTConfig
+	DashScope DashScopeConfig
 }
 
 var AppConfig Config

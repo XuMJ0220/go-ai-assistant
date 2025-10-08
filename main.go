@@ -11,6 +11,8 @@ func main() {
 
 	core.InitDB()
 
+	core.InitLLMClient()
+
 	router := routes.SetupRouter()
 
 	router.Run(":8080")
