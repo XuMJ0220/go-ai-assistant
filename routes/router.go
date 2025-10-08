@@ -20,6 +20,18 @@ func SetupRouter() *gin.Engine {
 			userRoutes.POST("/register", api.Register)
 			userRoutes.POST("/login", api.Login) // 添加登录路由
 		}
+
+		// 受保护的路由组
+		protectedRoutes:=apiV1.Group("")
+		protectedRoutes.Use(api.AuthMiddleware())
+		{
+			// 知识库路由组
+			kbRoutes := protectedRoutes.Group("/knowledge-bases")
+			{
+				kbRoutes.POST("", api.CreateKnowledgeBase)    // POST /api/v1/knowledge-bases
+				kbRoutes.GET("", api.ListKnowledgeBases)      // GET /api/v1/knowledge-bases
+			}
+		}
 	}
 
 	return router
