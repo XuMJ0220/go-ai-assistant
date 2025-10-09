@@ -30,6 +30,7 @@ func SetupRouter() *gin.Engine {
 			{
 				kbRoutes.POST("", api.CreateKnowledgeBase) // POST /api/v1/knowledge-bases
 				kbRoutes.GET("", api.ListKnowledgeBases)   // GET /api/v1/knowledge-bases
+				kbRoutes.POST("/:kb_id/documents", api.UploadDocumentHandler)
 			}
 			// 聊天路由组
 			chatRoutes := protectedRoutes.Group("/chat")

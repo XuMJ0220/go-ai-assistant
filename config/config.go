@@ -24,6 +24,7 @@ type DashScopeConfig struct {
 	ApiKey string `mapstructure:"api_key"`
 }
 
+
 type Config struct {
 	Database  DBConfig
 	JWT       JWTConfig

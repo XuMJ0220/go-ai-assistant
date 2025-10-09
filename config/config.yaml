@@ -10,6 +10,3 @@ jwt:
   expire_hours: 72 # Token 有效期（小时）
 dashscope:
   api_key: "sk-fe87b648bb1b4ed4baf5d2d0431386cb"
-
-chromadb:
-  url: "http://localhost:8000"

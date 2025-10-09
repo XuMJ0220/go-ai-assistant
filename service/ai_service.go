@@ -33,3 +33,19 @@ func SimpleChat(input SimpleChatInput) (string, error) {
 	}
 	return resp.Choices[0].Message.Content, nil
 }
+
+func CreateEmbeddings(texts []string) ([][]float32, error) {
+	req := openai.EmbeddingRequest{
+		Input: texts,
+		Model: openai.AdaEmbeddingV2, // 这里虽然写的是 Ada, 但 DashScope 会根据我们 BaseURL 路由到他们的 Embedding 模型
+	}
+	resp, err := core.OpenAIClient.CreateEmbeddings(context.Background(), req)
+	if err != nil {
+		return nil, err
+	}
+	embeddings := make([][]float32, len(resp.Data))
+	for i, data := range resp.Data {
+		embeddings[i] = data.Embedding
+	}
+	return embeddings, nil
+}
